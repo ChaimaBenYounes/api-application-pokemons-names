@@ -19,5 +19,4 @@ class ReadJsonFile
         return json_decode($contents);
     }
 
-
 }
