@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190220202359 extends AbstractMigration
+final class Version20190302192312 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,6 +23,7 @@ final class Version20190220202359 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE pokemon (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE pokemon_type (pokemon_id INT NOT NULL, type_id INT NOT NULL, INDEX IDX_B077296A2FE71C3E (pokemon_id), INDEX IDX_B077296AC54C8C93 (type_id), PRIMARY KEY(pokemon_id, type_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE pokemon_faiblesse (pokemon_id INT NOT NULL, faiblesse_id INT NOT NULL, INDEX IDX_808DF5722FE71C3E (pokemon_id), INDEX IDX_808DF5728A71E832 (faiblesse_id), PRIMARY KEY(pokemon_id, faiblesse_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -43,6 +44,7 @@ final class Version20190220202359 extends AbstractMigration
         $this->addSql('ALTER TABLE pokemon_faiblesse DROP FOREIGN KEY FK_808DF5722FE71C3E');
         $this->addSql('ALTER TABLE pokemon_faiblesse DROP FOREIGN KEY FK_808DF5728A71E832');
         $this->addSql('DROP TABLE type');
+        $this->addSql('DROP TABLE user');
         $this->addSql('DROP TABLE pokemon');
         $this->addSql('DROP TABLE pokemon_type');
         $this->addSql('DROP TABLE pokemon_faiblesse');
