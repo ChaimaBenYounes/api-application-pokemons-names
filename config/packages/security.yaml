@@ -11,14 +11,19 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
+        api:
+            pattern: ^/api/pokemon
+            anonymous: true
+            stateless: true
+            guard:
+                authenticators:
+                    - App\Security\JwtTokenAuthenticator
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
-            guard:
-                authenticators:
-                    - App\Security\JwtTokenAuthenticator
+
 
             # activate different ways to authenticate
 
